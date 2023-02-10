@@ -1,0 +1,35 @@
+{
+  "branches": [
+    "main"
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "dist/lib/CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/lib/CHANGELOG.md",
+            "label": "Changelog"
+          }
+        ],
+        "releasedLabels": [
+          "[skip ci] chore(release): ${nextRelease.version} ${branch.name}\n\n${nextRelease.notes}"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "dist/lib"
+      }
+    ]
+  ]
+}
