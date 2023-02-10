@@ -8,7 +8,8 @@ on:
       - main
 
 jobs:
-  release:
+  
+  release_library:
     permissions:
       contents: write
       issues: write
@@ -16,14 +17,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - uses: actions/setup-node@v2
         with:
           node-version: 16
+      
       - run: npm install
+      
       - run: npm run build lib
+      - run: npm run build sample
+      
       # disabling tests
       # - run: npm run test lib --browsers=ChromeHeadless --watch=false --code-coverage
+
       - run: npm run semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/sample
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
