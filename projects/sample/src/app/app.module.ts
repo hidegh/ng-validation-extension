@@ -4,10 +4,12 @@ import { LibModule } from '../../../lib/src/public-api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SecondComponent } from './second.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SecondComponent
   ],
   imports: [
     BrowserModule,
