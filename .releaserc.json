@@ -18,6 +18,9 @@
           {
             "path": "dist/lib/CHANGELOG.md",
             "label": "Changelog"
+          },
+          {
+            "path": "dist/lib/package.json"
           }
         ],
         "releasedLabels": [
