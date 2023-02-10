@@ -25,7 +25,7 @@ jobs:
       - run: npm install
       
       - run: npm run build lib
-      - run: npm run build sample
+      - run: npm run build sample -- --base-href /nx-validation-extension/
       
       # disabling tests
       # - run: npm run test lib --browsers=ChromeHeadless --watch=false --code-coverage
