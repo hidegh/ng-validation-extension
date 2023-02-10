@@ -1,11 +1,24 @@
 name: Release
 
 on:
+  
   workflow_dispatch:
+    inputs:
+      comment:
+        description: Just a dummy input parameter
+        default: "Hello world"
+        type: "string"
+
   push:
     branches:
       - master
       - main
+
+env:
+  libName: lib
+  appName: app
+  appDist: dist/sample
+  appBaseHref: /nx-validation-extension/
 
 jobs:
   
@@ -17,7 +30,7 @@ jobs:
       pull-requests: write
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
       
@@ -27,22 +40,21 @@ jobs:
       
       - run: npm install
       
-      - run: npm run build lib
-      - run: npm run build sample -- --base-href /nx-validation-extension/
+      - run: npm run build ${{ env.libName }}
+      - run: npm run build ${{ env.appName }} -- --base-href ${{ env.appBaseHref }}
       
       # disabling tests
-      # - run: npm run test lib --browsers=ChromeHeadless --watch=false --code-coverage
+      # - run: npm run test ${{ env.libName }} --browsers=ChromeHeadless --watch=false --code-coverage
 
       - run: npm run semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/sample
+          publish_dir: ${{ env.appDist }}
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
