@@ -1,6 +1,7 @@
 {
   "name": "nx-validation-extension-ws",
   "version": "0.0.0-development",
+  "private": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
