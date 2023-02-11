@@ -16,7 +16,7 @@ on:
 
 env:
   libName: lib
-  appName: app
+  appName: sample
   appDist: dist/sample
   appBaseHref: /nx-validation-extension/
 
