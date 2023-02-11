@@ -9,10 +9,12 @@ on:
         default: "Hello world"
         type: "string"
 
-  push:
-    branches:
-      - master
-      - main
+  # disabled due to tests
+
+  # push:
+  #   branches:
+  #     - master
+  #     - main
 
 env:
   libName: lib
