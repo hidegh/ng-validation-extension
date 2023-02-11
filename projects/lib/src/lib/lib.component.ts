@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <p>
       THIS IS A COMPONENT INSIDE THE LIBRARY!
+      <<br/>
     </p>
   `,
   styles: [
